@@ -11,7 +11,9 @@ const forecast = (latitude, longitude, callback) => {
         } else if (body.error){
             callback('Unable to find location', undefined)
         } else {
-            callback(undefined, body.current.weather_descriptions + ". It is currently " + body.current.temperature + " degrees out. There is a " + body.current.precip + "% chance of rain. The humidity is " + body.current.humidity + "% and the UV index is " + body.current.uv_index + ".");
+            const forecastData = body.current.weather_descriptions + ". It is currently " + body.current.temperature + " degrees out. There is a " + body.current.precip + "% chance of rain. The humidity is " + body.current.humidity + "% and the UV index is " + body.current.uv_index + "."
+            const approximateLocation = body.location.name + ", " + body.location.country
+            callback(undefined, {forecastData, approximateLocation});
         }
     })
 
